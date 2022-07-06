@@ -234,7 +234,10 @@ class RayLauncher(_Launcher):
         self._strategy._worker_setup(process_idx=global_rank)
 
         # Debug
-        print(function.__self__.strategy.root_device, self._strategy.root_device)
+        print('root_device=', function.__self__.strategy.root_device, self._strategy.root_device)
+        print('global_rank=', function.__self__.strategy.global_rank, self._strategy.global_rank)
+        print('local_rank=', function.__self__.strategy.local_rank, self._strategy.local_rank)
+
         function.__self__.strategy.root_device = self._strategy.root_device
 
         results = function(*args, **kwargs)
