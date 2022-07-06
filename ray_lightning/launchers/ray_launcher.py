@@ -232,9 +232,10 @@ class RayLauncher(_Launcher):
             init_session(rank=global_rank, queue=tune_queue)
 
         self._strategy._worker_setup(process_idx=global_rank)
-        function.__self__.strategy.root_device = self._strategy.root_device
+
         # Debug
-        print(function.__self__.strategy)
+        print(function.__self__.strategy.root_device, self._strategy.root_device)
+        function.__self__.strategy.root_device = self._strategy.root_device
 
         results = function(*args, **kwargs)
 
